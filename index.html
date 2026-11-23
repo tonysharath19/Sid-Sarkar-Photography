@@ -326,7 +326,9 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 /* ---------- Contact ---------- */
 .ct{padding-bottom:clamp(60px,10vh,120px)}
 .ct-big{font-family:'Inter',system-ui,sans-serif;font-weight:800;font-size:clamp(3rem,10.5vw,10.5rem);line-height:.9;letter-spacing:-.05em;margin-bottom:clamp(40px,6vw,80px)}
-.ct-big em{color:var(--a);font-size:1.08em}
+.ct-big em{font-size:1.08em}
+#ctBig em,#ctBig em .wi{color:#c7ff00}
+#ctBig .ct-orange,#ctBig .ct-orange .wi{color:var(--a)}
 .ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:start}
 .ct-info{display:grid;gap:30px}
 .ct-info .mail{font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:clamp(1.3rem,2.6vw,2.3rem);letter-spacing:-.03em;display:inline-block;border-bottom:1px solid var(--a);padding-bottom:6px}
@@ -771,7 +773,7 @@ body.ready .nav.hide{transform:translateY(-200%);opacity:0;pointer-events:none}
 <section class="ct" id="contact" data-pal="8" data-dim=".75" data-name="Contact">
   <video class="section-video luminous-video" autoplay muted loop playsinline aria-hidden="true"><source src="assets/videos/luminious-mobile.mp4" type="video/mp4" media="(max-width:760px)"><source src="assets/videos/luminous-desktop.mp4" type="video/mp4"></video>
   <div class="sec-h"><span class="tag rv">Replies within 24h</span></div>
-  <h2 class="ct-big sp" id="ctBig">Let's make something <em>luminous.</em></h2>
+  <h2 class="ct-big sp" id="ctBig"><span class="ct-orange">Let's</span> make something <em>luminous.</em></h2>
   <div class="ct-grid">
     <div class="ct-info">
       <div class="rv"><small>Write</small><a class="mail" href="mailto:hello@sidsarkar.studio" data-scramble data-magnetic>hello@sidsarkar.studio</a></div>
