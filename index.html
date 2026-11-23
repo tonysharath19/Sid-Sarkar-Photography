@@ -343,6 +343,10 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .fld input:focus+label,.fld input:not(:placeholder-shown)+label,.fld textarea:focus+label,.fld textarea:not(:placeholder-shown)+label{top:0;font-size:1rem;letter-spacing:.16em;text-transform:none;color:var(--a)}
 .types{display:flex;gap:8px;flex-wrap:wrap}
 .types .pill{padding:8px 16px;font-size:1rem}
+.enquiry-type{display:grid;gap:8px}
+.enquiry-type label{font-size:1rem;color:#282b32}
+.enquiry-type select{width:100%;min-width:0;padding:12px 14px;font:inherit;font-size:16px;color:#080a0e;background:#fff;border:1px solid #2228;border-radius:10px;cursor:pointer}
+.enquiry-type select:focus-visible{outline:2px solid var(--a);outline-offset:3px}
 .send{justify-self:start;margin-top:6px;background:var(--fg);color:#000;border-color:var(--fg)}
 .send .arr{background:#000;color:#fff}
 footer{padding:80px var(--pad) 30px;overflow:hidden}
@@ -605,6 +609,28 @@ body.ready .nav.hide{transform:translateY(-200%);opacity:0;pointer-events:none}
  #voices .vc-card{min-height:100svh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center}
  #voices .vc-q{width:100%}
 }
+
+/* Touch devices keep native scrolling and stable geometry as browser chrome moves. */
+.mobile-motion main > section{position:relative;top:auto}
+.mobile-motion body{background:var(--bg)}
+.mobile-motion .hero,.mobile-motion .about-pin,.mobile-motion .about-pin .manifesto,
+.mobile-motion #voices,.mobile-motion #voices .vc-card{min-height:100svh}
+.mobile-motion .hs-sticky{height:100svh}
+.mobile-motion .sc-media{height:62svh}
+.mobile-motion .glass,.mobile-motion .menu,.mobile-motion .lb,.mobile-motion .cmp-handle{
+ -webkit-backdrop-filter:none;backdrop-filter:none;background-color:rgba(15,17,23,.94)}
+/* Keep the statement's unrevealed words faint against its light panel. */
+.about-pin .manifesto.glass{background:#f5f5f5}
+.about-pin .manifesto .sw{transition:none;will-change:auto}
+/* Keep filter and navigation labels readable in both rendering modes. */
+#filters .pill,#presets .pill{color:#101218;background:#f5f7fb;border-color:#cbd1dc}
+#filters .pill:not(.on):is(:hover,:focus-visible),#presets .pill:not(.on):is(:hover,:focus-visible){color:#101218;background:#ffe0c9}
+#filters .pill.on,#presets .pill.on{color:#fff;background:#101218;border-color:#ffb681}
+.nav .nav-links.glass{color:#101218;background:#f5f7fb}
+.nav .nav-links a,.nav .nav-links a .roll{color:#101218}
+.nav .nav-links a:is(:hover,:focus-visible,.on),
+.nav .nav-links a:is(:hover,:focus-visible,.on) .roll{color:#fff;background:#080a0e}
+#filters .pill:focus-visible,#presets .pill:focus-visible{outline:2px solid var(--a);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -660,7 +686,7 @@ body.ready .nav.hide{transform:translateY(-200%);opacity:0;pointer-events:none}
 <main>
 <!-- HERO -->
 <section class="hero" id="top" data-pal="0" data-dim="1" data-name="Intro">
-  <video class="section-video hero-video" autoplay muted loop playsinline aria-hidden="true"><source src="assets/videos/hero-mobile.mp4" type="video/mp4" media="(max-width:760px)"><source src="assets/videos/hero-desktop.mov"></video>
+  <video class="section-video hero-video" autoplay preload="auto" muted loop playsinline aria-hidden="true"><source src="assets/videos/hero-mobile.mp4" type="video/mp4" media="(max-width:760px)"><source src="assets/videos/hero-desktop.mov"></video>
 
   <div class="intro-note glass"> Bengaluru, India <span>One Click Away From Your Click</span></div>
   <div class="hero-in">
@@ -771,7 +797,7 @@ body.ready .nav.hide{transform:translateY(-200%);opacity:0;pointer-events:none}
 
 <!-- CONTACT -->
 <section class="ct" id="contact" data-pal="8" data-dim=".75" data-name="Contact">
-  <video class="section-video luminous-video" autoplay muted loop playsinline aria-hidden="true"><source src="assets/videos/luminious-mobile.mp4" type="video/mp4" media="(max-width:760px)"><source src="assets/videos/luminous-desktop.mp4" type="video/mp4"></video>
+  <video class="section-video luminous-video" autoplay preload="auto" muted loop playsinline aria-hidden="true"><source src="assets/videos/luminious-mobile.mp4" type="video/mp4" media="(max-width:760px)"><source src="assets/videos/luminous-desktop.mp4" type="video/mp4"></video>
   <div class="sec-h"><span class="tag rv">Replies within 24h</span></div>
   <h2 class="ct-big sp" id="ctBig"><span class="ct-orange">Let's</span> make something <em>luminous.</em></h2>
   <div class="ct-grid">
@@ -781,7 +807,7 @@ body.ready .nav.hide{transform:translateY(-200%);opacity:0;pointer-events:none}
       <div class="rv" style="--d:.2s"><small>Elsewhere</small><div class="socials"><a class="glass spot" href="#" data-magnetic><span class="roll">Instagram</span></a><a class="glass spot" href="#" data-magnetic><span class="roll">Behance</span></a><a class="glass spot" href="#" data-magnetic><span class="roll">Vimeo</span></a><a class="glass spot" href="#" data-magnetic><span class="roll">500px</span></a></div></div>
     </div>
     <form class="form glass spot rv" id="form" style="--d:.15s">
-      <div class="types" id="types"></div>
+      <div class="enquiry-type"><label for="types">Enquiry type</label><select id="types" name="enquiryType"><option value="Editorial">Editorial</option><option value="Portrait">Portrait</option><option value="Architecture">Architecture</option><option value="Prints">Prints</option><option value="Other">Other</option></select></div>
       <div class="fld"><input id="fn" placeholder=" " required><label for="fn">Your name</label></div>
       <div class="fld"><input id="fe" type="email" placeholder=" " required><label for="fe">Email address</label></div>
       <div class="fld"><textarea id="fm" rows="3" placeholder=" " required></textarea><label for="fm">Tell me about the project</label></div>
@@ -846,8 +872,12 @@ const ease = t => 1 - Math.pow(1 - t, 4);
 const motionAvailable = !!(window.gsap && window.ScrollTrigger);
 if (motionAvailable) gsap.registerPlugin(ScrollTrigger);
 let motionStarted = false;
-// Motion is always enabled, independent of saved or operating-system preferences.
+// Motion is explicitly enabled for both desktop and mobile.
 const reducedMotion = false;
+const mobileMotion = matchMedia('(pointer: coarse), (max-width:760px)').matches;
+document.documentElement.classList.toggle('mobile-motion', mobileMotion);
+if (motionAvailable) ScrollTrigger.config({ignoreMobileResize:true});
+let layoutHeight = innerHeight;
 const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
 
 /* ====================== data ====================== */
@@ -988,8 +1018,6 @@ $('#svGrid').innerHTML = SERVICES.map((s, i) => `<article class="sv glass spot r
 $('#vcQ').innerHTML = QUOTES.map((q, i) => `<blockquote class="${i ? '' : 'on'}">&ldquo;${q.q}&rdquo;<cite><b>${q.a}</b> - ${q.r}</cite></blockquote>`).join('');
 $('#vcDots').innerHTML = QUOTES.map((_, i) => `<button class="${i ? '' : 'on'}" aria-label="Quote ${i + 1}"><i></i></button>`).join('');
 
-// contact types
-$('#types').innerHTML = ['Editorial', 'Portrait', 'Architecture', 'Prints', 'Other'].map((t, i) => `<button type="button" class="pill glass${i ? '' : ' on'}">${t}</button>`).join('');
 
 $$('.sc-meta h3,.sc-meta small,.sv h3,.sv .pr small').forEach(titleCase);
 initRoll();
@@ -1115,7 +1143,6 @@ function showQ(i) { qi = i; qs.forEach((q, k) => q.classList.toggle('on', k === 
 qd.forEach((d, i) => d.onclick = () => showQ(i)); showQ(0);
 
 /* ====================== contact ====================== */
-$('#types').addEventListener('click', e => { const b = e.target.closest('.pill'); if (!b) return; $$('#types .pill').forEach(p => p.classList.remove('on')); b.classList.add('on'); });
 $('#form').addEventListener('submit', e => { e.preventDefault(); toast('Message sent ✦ I\'ll reply within 24 hours.'); e.target.reset(); });
 const fmt = new Intl.DateTimeFormat('en-GB', {timeZone:'Asia/Kolkata', hour:'2-digit', minute:'2-digit', second:'2-digit'});
 setInterval(() => $('#clock').textContent = fmt.format(new Date()), 1000); $('#clock').textContent = fmt.format(new Date());
@@ -1183,19 +1210,29 @@ const hero = $('#top');
 const speedEls = $$('[data-speed]');
 const HS = {sec:$('#series'), track:hsTrack, bar:$('#hsBar'), num:$('#hsNum'), x:0, dist:0, cards:$$('.sc')};
 function sizeAll() {
+  layoutHeight = mobileMotion ? $('.hs-sticky').clientHeight : innerHeight;
   HS.dist = Math.max(0, HS.track.scrollWidth - innerWidth + 0);
-  HS.sec.style.height = (HS.dist + innerHeight) + 'px';
+  HS.sec.style.height = (HS.dist + layoutHeight) + 'px';
   const pin = $('.about-pin');
-  $('.about-reveal').style.height = (Math.max(innerHeight, pin.offsetHeight) + innerHeight * 2.8) + 'px';
-  pin.style.top = Math.min(0, (innerHeight - pin.offsetHeight) / 2) + 'px';
+  $('.about-reveal').style.height = (Math.max(layoutHeight, pin.offsetHeight) + layoutHeight * 2.8) + 'px';
+  pin.style.top = Math.min(0, (layoutHeight - pin.offsetHeight) / 2) + 'px';
   $$('main > section').forEach((section, i) => {
     section.style.setProperty('--stack-top', Math.min(0, innerHeight - section.offsetHeight) + 'px');
     section.style.zIndex = i + 4;
   });
   S.docH = Math.max(1, document.documentElement.scrollHeight - innerHeight);
 }
-addEventListener('resize', () => { sizeAll(); if (colCount() !== lastCols) renderGallery(); });
-if (window.visualViewport) visualViewport.addEventListener('resize', sizeAll);
+let resizeTimer, layoutWidth = innerWidth;
+addEventListener('resize', () => {
+  if (mobileMotion && innerWidth === layoutWidth) return;
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    layoutWidth = innerWidth;
+    sizeAll();
+    if (colCount() !== lastCols) renderGallery();
+    if (motionStarted) ScrollTrigger.refresh();
+  }, 180);
+});
 addEventListener('load', () => { sizeAll(); setTimeout(sizeAll, 600); setTimeout(sizeAll, 2500); });
 if (document.fonts) document.fonts.ready.then(sizeAll);
 sizeAll();
@@ -1346,7 +1383,7 @@ try { GL = reducedMotion ? null : initGL(); } catch (error) { console.warn('WebG
 function syncPillState(root) {
   $$('.pill', root).forEach(button => button.setAttribute('aria-pressed', String(button.classList.contains('on'))));
 }
-['#filters', '#presets', '#types'].forEach(selector => {
+['#filters', '#presets'].forEach(selector => {
   const group = $(selector); syncPillState(group);
   group.addEventListener('click', () => syncPillState(group));
 });
@@ -1357,6 +1394,7 @@ const prog = $('#prog'), nav = $('#nav');
 let rt = 0;
 function tick(ts) {
   requestAnimationFrame(tick);
+  if (document.hidden) return;
   S.t = ts / 1000; S.y = scrollY; S.sy = lerp(S.sy, S.y, .1); S.vel = S.y - S.sy;
   if (S.introOn && S.intro < 1) S.intro += .0065;
 
@@ -1373,7 +1411,7 @@ function tick(ts) {
   updateNav();
 
   // parallax
-  const vh = innerHeight;
+  const vh = mobileMotion ? layoutHeight : innerHeight;
   speedEls.forEach(el => {
     if (reducedMotion) return;
     const r = el.parentElement.getBoundingClientRect(); if (r.bottom < -200 || r.top > vh + 200) return;
@@ -1394,9 +1432,9 @@ function tick(ts) {
   const hr = HS.sec.getBoundingClientRect();
   if (hr.top < vh && hr.bottom > 0) {
     const total = Math.max(1, HS.sec.offsetHeight - vh), p = clamp(-hr.top / total);
-    if (!motionStarted) { HS.x = lerp(HS.x, -p * HS.dist, .1); HS.track.style.transform = `translate3d(${HS.x}px,0,0)`; } HS.bar.style.transform = `scaleX(${p})`;
+    if (!motionStarted) { HS.x = mobileMotion || reducedMotion ? -p * HS.dist : lerp(HS.x, -p * HS.dist, .1); HS.track.style.transform = `translate3d(${HS.x}px,0,0)`; } HS.bar.style.transform = `scaleX(${p})`;
     HS.num.textContent = String(Math.min(HS.cards.length, Math.floor(p * HS.cards.length) + 1)).padStart(2, '0') + ' / ' + String(HS.cards.length).padStart(2, '0');
-    HS.cards.forEach(c => {
+    if (!reducedMotion) HS.cards.forEach(c => {
       const r = c.getBoundingClientRect(); if (r.right < -100 || r.left > innerWidth + 100) return;
       const n = clamp((r.left + r.width / 2 - innerWidth / 2) / (innerWidth / 2 + r.width / 2), -1, 1);
       c.firstElementChild.nextElementSibling.firstElementChild.style.transform = `translate3d(${-n * r.width * .12}px,0,0)`;
@@ -1472,24 +1510,40 @@ setTimeout(() => { if (!document.body.classList.contains('ready') && $('#loader'
 (() => {
   const mobile = matchMedia('(max-width:760px)');
   const videos = document.querySelectorAll('.section-video');
+  function syncPlayback(video) {
+    if (document.hidden) { video.pause(); return; }
+    video.muted = true;
+    video.play().catch(() => {});
+  }
+  const resumeVideos = () => videos.forEach(syncPlayback);
+  document.addEventListener('visibilitychange', resumeVideos);
+  window.addEventListener('pageshow', resumeVideos);
+  // Retry autoplay when a mobile browser requires a user gesture.
+  document.addEventListener('pointerdown', resumeVideos, {passive:true});
+  document.addEventListener('touchend', resumeVideos, {passive:true});
   function updateVideos() {
     videos.forEach(video => {
       const sources = video.querySelectorAll('source');
       const source = sources[mobile.matches ? 0 : 1].getAttribute('src');
       video.muted = true;
       video.loop = true;
-      video.defaultPlaybackRate = video.classList.contains('luminous-video') && mobile.matches ? 2 : 1;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.defaultMuted = true;
+      video.defaultPlaybackRate = video.classList.contains('luminous-video') ? 3 : 1;
       video.playbackRate = video.defaultPlaybackRate;
       if (video.getAttribute('src') !== source) {
         video.src = source;
         video.load();
       }
-      video.play().catch(() => {});
+      syncPlayback(video);
     });
   }
   videos.forEach(video => video.addEventListener('loadedmetadata', () => {
     video.playbackRate = video.defaultPlaybackRate;
+    syncPlayback(video);
   }));
+  videos.forEach(video => video.addEventListener('canplay', () => syncPlayback(video)));
   mobile.addEventListener('change', updateVideos);
   updateVideos();
 })();
